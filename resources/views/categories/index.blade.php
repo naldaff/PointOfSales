@@ -69,7 +69,7 @@
                                 @endcomponent
                             @endif
                                
-                                <table id="example1" class="table table-striped table-hover">
+                                <table id="datatable" class="table table-striped table-hover">
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -111,3 +111,11 @@
         </section>
     </div>
 @endsection
+
+@push('js')
+    <script>
+      $(function () {
+        $("#datatable").DataTable();
+      });
+    </script>
+@endpush
