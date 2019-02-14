@@ -8,7 +8,7 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ asset('plugins/font-awesome/css/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="{{ asset('dist/css/ionicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/iCheck/flat/blue.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/morris/morris.css') }}">
@@ -18,7 +18,14 @@
     <link rel="stylesheet" href="{{ asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables/dataTables.bootstrap4.css') }}">
 
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+     <link rel="stylesheet" href="{{ asset('dist/css/fonts-googleapis.css') }}">
+
+    <style type="text/css">
+        .select2-selection {
+            height: auto !important;
+        }
+    </style>
+    
     @stack('css')
 </head>
 <body class="hold-transition sidebar-mini">
@@ -162,7 +169,7 @@
 
 <!-- jQuery -->
     <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="{{ asset('plugins/jQueryUI/jquery-ui.min.js') }}"></script>
     <script>
         $.widget.bridge('uibutton', $.ui.button)
     </script>
@@ -185,7 +192,7 @@
     <script src="{{ asset('plugins/datatables/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('plugins/datatables/dataTables.bootstrap4.js') }}"></script>
 
-    @stack('js')
+    @yield('js')
     <!-- JS Datatable -->
     
 </body>
