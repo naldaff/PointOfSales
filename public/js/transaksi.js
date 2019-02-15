@@ -14898,34 +14898,28 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   data: {
     product: {
       id: '',
-      qty: '',
       price: '',
       name: '',
       photo: ''
     },
-    //menambahkan cart
     cart: {
       product_id: '',
-      qty: '1'
+      qty: 1
     },
     customer: {
       email: ''
     },
-    //untuk menampung list cart
     shoppingCart: [],
     submitCart: false,
     formCustomer: false,
-    reslutStatus: false,
+    resultStatus: false,
     submitForm: false,
     errorMessage: '',
     message: ''
   },
   watch: {
-    //apabila nilai dari product->id berubah maka
-    'product.id': function productId() {
-      //mengecek jika nilai dari product->id ada
-      if (this.product.id) {
-        //maka akan menjalankan methods getProduct
+    'cart.product_id': function cartProduct_id() {
+      if (this.cart.product_id) {
         this.getProduct();
       }
     },
@@ -14941,38 +14935,31 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
       }
     }
   },
-  //menggunakan library select2 ketika file ini di-load
   mounted: function mounted() {
     var _this = this;
 
-    $('#product_id').on('change', function () {
-      //apabila terjadi perubahan nilai yg dipilih maka nilai tersebut 
-      //akan disimpan di dalam var product > id
-      _this.product.id = $('#product_id').val();
+    $('#product_id').select2({
+      width: '100%'
+    }).on('change', function () {
+      _this.cart.product_id = $('#product_id').val();
     });
+    this.getCart();
   },
   methods: {
     getProduct: function getProduct() {
       var _this2 = this;
 
-      //fetch ke server menggunakan axios dengan mengirimkan parameter id
-      //dengan url /api/product/{id}
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/product/".concat(this.product.id)).then(function (response) {
-        //assign data yang diterima dari server ke var product
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/product/".concat(this.cart.product_id)).then(function (response) {
         _this2.product = response.data;
       });
     },
-    //method untuk menambahkan product yang dipilih ke dalam cart
     addToCart: function addToCart() {
       var _this3 = this;
 
-      this.submitCart = true; //send data ke server
-
+      this.submitCart = true;
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/cart', this.cart).then(function (response) {
         setTimeout(function () {
-          //apabila berhasil data disimpan ke dalam var shoppingCart
-          _this3.shoppingCart = response.data; //mengosongkan var
-
+          _this3.shoppingCart = response.data;
           _this3.cart.product_id = '';
           _this3.cart.qty = 1;
           _this3.product = {
@@ -14986,17 +14973,13 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
         }, 2000);
       }).catch(function (error) {});
     },
-    //mengambil list cart yang telah disimpan
     getCart: function getCart() {
       var _this4 = this;
 
-      //fetch data ke server
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/cart').then(function (response) {
-        //data yang diterima disimpan ke dalam var shoppingCart
         _this4.shoppingCart = response.data;
       });
     },
-    //menghapus cart
     removeCart: function removeCart(id) {
       var _this5 = this;
 
@@ -15032,18 +15015,67 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     searchCustomer: function searchCustomer() {
       var _this6 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('api/customer/search', {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/customer/search', {
         email: this.customer.email
       }).then(function (response) {
         if (response.data.status == 'success') {
           _this6.customer = response.data.data;
-          _this6.reslutStatus = true;
+          _this6.resultStatus = true;
         }
 
         _this6.formCustomer = true;
       }).catch(function (error) {});
     },
-    sendOrder: function sendOrder() {}
+    sendOrder: function sendOrder() {
+      var _this7 = this;
+
+      this.errorMessage = '';
+      this.message = '';
+
+      if (this.customer.email != '' && this.customer.name != '' && this.customer.phone != '' && this.customer.address != '') {
+        this.$swal({
+          title: 'Kamu Yakin?',
+          text: 'Kamu Tidak Dapat Mengembalikan Tindakan Ini!',
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Iya, Lanjutkan!',
+          cancelButtonText: 'Tidak, Batalkan!',
+          showCloseButton: true,
+          showLoaderOnConfirm: true,
+          preConfirm: function preConfirm() {
+            return new Promise(function (resolve) {
+              setTimeout(function () {
+                resolve();
+              }, 2000);
+            });
+          },
+          allowOutsideClick: function allowOutsideClick() {
+            return !_this7.$swal.isLoading();
+          }
+        }).then(function (result) {
+          if (result.value) {
+            _this7.submitForm = true;
+            axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/checkout', _this7.customer).then(function (response) {
+              setTimeout(function () {
+                _this7.getCart();
+
+                _this7.message = response.data.message;
+                _this7.customer = {
+                  name: '',
+                  phone: '',
+                  address: ''
+                };
+                _this7.submitForm = false;
+              }, 1000);
+            }).catch(function (error) {
+              console.log(error);
+            });
+          }
+        });
+      } else {
+        this.errorMessage = 'Masih ada inputan yang kosong!';
+      }
+    }
   }
 });
 

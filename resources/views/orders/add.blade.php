@@ -40,16 +40,16 @@
                                     <!-- SUBMIT DIJALANKAN KETIKA TOMBOL DITEKAN -->
                                     <form action="#" @submit.prevent="addToCart" method="post">                                
             							<div class="form-group">
-            								<label>Produk</label>
-            								<select name="product_id" id="product_id"
+                                            <label for="">Produk</label>
+                                            <select name="product_id" id="product_id"
                                                 v-model="cart.product_id"
-                                                class="form-control" width="100%" required>
-                                                <option value="">Pilih</option>
+                                                class="form-control" required width="100%">
+                                                <option value="">Pilih produk</option>
                                                 @foreach ($products as $product)
                                                 <option value="{{ $product->id }}">{{ $product->code }} - {{ $product->name }}</option>
                                                 @endforeach
                                             </select>
-            							</div>
+                                        </div>
             							<div class="form-group">
             								<label for="">Qty</label>
             								<input type="number" name="qty" id="qty" 
@@ -110,7 +110,7 @@
 @endsection
 
 @section('js')
-    <script src="{{ asset('plugins/select2/select2.full.min.js') }}"></script>
+    <script src="{{ asset('plugins/select2/selects2.min.js') }}"></script>
     <script src="{{ asset('plugins/accounting/accounting.min.js') }}"></script>
     <script src="{{ asset('js/transaksi.js') }}"></script>
 @endsection

@@ -50,7 +50,7 @@
 </div>
 
 @section('js')
-    <script src="{{ asset('plugins/select2/select2.full.min.js') }}"></script>
+    <script src="{{ asset('plugins/select2/selects2.min.js') }}"></script>
     <script src="{{ asset('plugins/accounting/accounting.min.js') }}"></script>
     <script src="{{ asset('js/transaksi.js') }}"></script>
 @endsection
