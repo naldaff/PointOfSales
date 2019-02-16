@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@push('css')
+	<link rel="stylesheet" href="{{ asset('plugins/select2/select2.min.css') }}" />
+@endpush
+
 @section('title')
     <title>Manajemen Order</title>
 @endsection
@@ -56,7 +60,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="">Pelanggan</label>
-                                            <select name="customer_id" class="form-control">
+                                            <select name="customer_id" class="form-control select">
                                                 <option value="">Pilih</option>
                                                 @foreach ($customers as $cust)
                                                 <option value="{{ $cust->id }}"
@@ -68,7 +72,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="">Kasir</label>
-                                            <select name="user_id" class="form-control">
+                                            <select name="user_id" class="form-control select">
                                                 <option value="">Pilih</option>
                                                 @foreach ($users as $user)
                                                 <option value="{{ $user->id }}"
@@ -184,6 +188,7 @@
 @endsection
 
 @section('js')
+	<script src="{{ asset('plugins/select2/selects2.min.js') }}"></script>
     <script>
         $('#start_date').datepicker({
             autoclose: true,
@@ -193,5 +198,6 @@
             autoclose: true,
             format: 'yyyy-mm-dd'
         });
+        $('.select').select2();
     </script>
 @endsection
