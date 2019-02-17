@@ -22,6 +22,7 @@
     },
     "dependencies": {
         "ajv": "^6.9.1",
+        "chart.js": "^2.7.3",
         "imagemin": "^5.0.0",
         "sweetalert2": "^8.0.7",
         "vue-sweetalert2": "^1.6.4"

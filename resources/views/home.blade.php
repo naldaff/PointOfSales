@@ -23,13 +23,13 @@
         </div>
 
         <!-- Main content -->
-        <section class="content">
+        <section class="content" id="ris">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-3 col-6">
                         <div class="small-box bg-info">
                             <div class="inner">
-                                <h3>0</h3>
+                                <h3>{{ $product }}</h3>
                                 <p>Products</p>
                             </div>
                             <div class="icon">
@@ -42,7 +42,7 @@
                     <div class="col-lg-3 col-6">
                         <div class="small-box bg-success">
                             <div class="inner">
-                                <h3>0<sup style="font-size: 20px">%</sup></h3>
+                                <h3>{{ $order }}</h3>
                                 <p>Orders</p>
                             </div>
                             <div class="icon">
@@ -54,7 +54,7 @@
                     <div class="col-lg-3 col-6">
                         <div class="small-box bg-warning">
                             <div class="inner">
-                                <h3>0</h3>
+                                <h3>{{ $customer }}</h3>
                                 <p>Customers</p>
                             </div>
                             <div class="icon">
@@ -66,8 +66,7 @@
                     <div class="col-lg-3 col-6">
                         <div class="small-box bg-danger">
                             <div class="inner">
-                                <h3>0</h3>
-
+                                <h3>{{ $user }}</h3>
                                 <p>Users</p>
                             </div>
                             <div class="icon">
@@ -77,7 +76,17 @@
                         </div>
                     </div>
                 </div>
+
+                <div>
+                    <!-- chart.js meminta element yang dimiliki ID ris-chart -->
+                    <canvas id="ris-chart"></canvas>
+                </div>
             </div>
         </section>
     </div>
+@endsection
+
+@section('js')
+    <!-- load file dashboard.js -->
+    <script src="{{ asset('js/dashboard.js') }}"></script>
 @endsection

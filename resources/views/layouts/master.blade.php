@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{{ asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables/dataTables.bootstrap4.css') }}">
 
-     <link rel="stylesheet" href="{{ asset('dist/css/fonts-googleapis.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
     <style type="text/css">
         .select2-selection {
