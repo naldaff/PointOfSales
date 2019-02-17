@@ -116,7 +116,7 @@
                                             <p>Total Omset</p>
                                         </div>
                                         <div class="icon">
-                                            <i class="ion ion-stats-bars"></i>
+                                            <i class="ion ion-cash"></i>
                                         </div>
                                     </div>
                                 </div>
